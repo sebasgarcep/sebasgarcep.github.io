@@ -6,12 +6,23 @@
 			<link rel="stylesheet" type="text/css" href="/css/main.css">
 		</head>
 		<body>
-			<nav>
-	    		<ul>
-	        		<li><a href="/">Home</a></li>
-		        	<li><a href="/about">About</a></li>
-	        		<li><a href="/cv">CV</a></li>
-	        		<li><a href="/blog">Blog</a></li>
+			<nav id="page-header">
+	    		<ul class="navigation-children-container">
+	        		<li class="navigation-children page-header-children">
+								<a href="/">Home</a>
+							</li>
+		        	<li class="navigation-children page-header-children">
+								<a href="/about">About</a>
+							</li>
+	        		<li class="navigation-children page-header-children">
+								<a href="/ai">AI</a>
+							</li>
+	        		<li class="navigation-children page-header-children">
+								<a href="/space">Space</a>
+							</li>
+	        		<li class="navigation-children page-header-children">
+								<a href="/others">Others</a>
+							</li>
 	    		</ul>
 			</nav>
 			<div class="container">
@@ -19,10 +30,14 @@
 			{{ content }}
 
 			</div><!-- /.container -->
-			<footer>
-	    		<ul>
-	        		<li><a href="mailto:hankquinlanhub@gmail.com">email</a></li>
-	        		<li><a href="https://github.com/hankquinlan">github.com/hankquinlan</a></li>
+			<footer id="page-footer">
+	    		<ul class="navigation-children-container">
+	        		<li class="navigation-children page-footer-children">
+								<a href="mailto:sebasgarcep@gmail.com">email</a>
+							</li>
+	        		<li class="navigation-children page-footer-children">
+								<a href="https://github.com/sebasgarcep">github.com/sebasgarcep</a>
+							</li>
 				</ul>
 			</footer>
 		</body>
