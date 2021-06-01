@@ -134,4 +134,4 @@ Finally, we need to point out that the denormalization process we covered in Par
 
 ## Up next
 
-Now that we have a data warehouse ready to go, we can begin thinking about our ETLs. This will be covered in [Part 3](/posts/from-zero-to-data-ready-part-3/) of the series.
+Now that we have a data warehouse ready to go, we can begin thinking about our ETLs. This will be covered in Part 3 of the series.
