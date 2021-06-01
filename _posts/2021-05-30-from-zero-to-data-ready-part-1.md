@@ -1,7 +1,7 @@
 ---
-title: From zero to data ready (Part 1)
+title: From Zero to Data-Ready (Part 1)
 date: 2021-05-30
-tags: [Data Engineering, Retail Project]     # TAG names should always be lowercase
+tags: [Data Engineering, Retail Project, From Zero to Data-Ready]
 image:
     src: /assets/img/planning.jpg
     alt: Planning
@@ -83,7 +83,7 @@ Now we need to export the data to begin poking through it. For this we can run t
 $ mdb-export database.mdb [table name] > [file name].csv
 ```
 
-This will write our table into a csv file and now we can play with it!
+This will write our table into a csv file and now we can play with it! I'm going to use Jupyter Notebook to perform the EDA. The reasons are twofold. First, doing EDA on Jupyter Notebook + Python using Pandas is relatively straightforward. Second, is that we are planning to write our ETLs on Python as our data is very small. This means that we can reuse whatever code we write here in the next step of our process. 
 
 First, we noticed was that these tables were severely denormalized, i.e. that the same data was found in two or more tables. Specifically, the table for barcodes repeated the information from the references table. Therefore, to keep a single source of truth for now on, we will only be looking at barcodes, as they fully describe an item.
 
@@ -171,4 +171,4 @@ The final result of whatever ETL processes we end up building later on should be
 
 ## Up next
 
-Now that we are done with our EDA and our data model definition, we have to build repeatable data pipelines that will keep our data in sync with whatever changes occur in the source database. We will cover this in Part 2.
+Now that we are done with our EDA and our data model definition, we have to build repeatable data pipelines that will keep our data in sync with whatever changes occur in the source database. We will cover this in [Part 2](/posts/from-zero-to-data-ready-part-2/).
