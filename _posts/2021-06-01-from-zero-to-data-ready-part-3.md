@@ -210,4 +210,4 @@ The final part is implementing our data pipelines. There is nothing to note abou
 
 # Up Next
 
-Now that our data warehouse is populated, we have most of the required infrastructure in place. We're only missing a Business Intelligence tool in our stack. In Part 4 we will build it using CubeJS. Stay tuned!
+Now that our data warehouse is populated, we have most of the required infrastructure in place. We're only missing a Business Intelligence tool in our stack. In [Part 4](/posts/from-zero-to-data-ready-part-4/) we will build it using CubeJS. Stay tuned!
