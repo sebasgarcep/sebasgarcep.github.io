@@ -1,10 +1,8 @@
 # Articles left to write
 
 - React Testing using Aria
-- Counting Primes Really Fast (Medium has a first draft)
 - Kalman Filter, Extended Kalman Filter
 - Data Science Insights with Retail Project
-- Predictive Modelling with Retail Project
 - Overview of Retail Project (This is basically the cover letter to my portfolio)
 
 # Things to do
