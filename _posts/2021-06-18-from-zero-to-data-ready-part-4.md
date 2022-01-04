@@ -3,7 +3,7 @@ title: From Zero to Data-Ready (Part 4)
 date: 2021-06-18
 tags: [Data Engineering, Retail Project, From Zero to Data-Ready]
 image:
-    src: /assets/img/dashboard.jpg
+    src: /assets/img/2021-06-18-from-zero-to-data-ready-part-4/dashboard.jpg
     alt: Dashboard
 ---
 
@@ -169,7 +169,7 @@ In `Schema` you can look at the raw tables of your database and autogenerate the
 
 In `Build` we can construct visualizations using a GUI. This is very similar to how a business intelligence tool like Power BI works, with the advantage that we also get the frontend code for the visualization (which we can copy and paste into our dashboard), and the SQL code that this visualization will ultimately run in the data warehouse. There's also an `Add to Dashboard` option, which allows us to automatically add any visualization we create here to our dashbboard.
 
-![Build Tab in CubeJS](/assets/img/build-cubejs.png)
+![Build Tab in CubeJS](/assets/img/2021-06-18-from-zero-to-data-ready-part-4/build-cubejs.png)
 
 Finally, `Dashboard App` gives us the option to build our dashboard in React, Angular or Vue, using a variety of charting libraries, and with the option to either allow or disallow the end-user from creating their own visualizations.
 
@@ -181,7 +181,7 @@ To make sure that the filter context is shared by both the header and the dashbo
 
 After these steps our application is working, and all that we need to hand this over to a client is to polish the design.
 
-![Dashboard Prototype](/assets/img/dashboard-prototype.png)
+![Dashboard Prototype](/assets/img/2021-06-18-from-zero-to-data-ready-part-4/dashboard-prototype.png)
 
 # Conclusion
 

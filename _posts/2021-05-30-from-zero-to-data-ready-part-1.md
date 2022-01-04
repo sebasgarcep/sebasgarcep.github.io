@@ -3,7 +3,7 @@ title: From Zero to Data-Ready (Part 1)
 date: 2021-05-30
 tags: [Data Engineering, Retail Project, From Zero to Data-Ready]
 image:
-    src: /assets/img/planning.jpg
+    src: /assets/img/2021-05-30-from-zero-to-data-ready-part-1/planning.jpg
     alt: Planning
 ---
 

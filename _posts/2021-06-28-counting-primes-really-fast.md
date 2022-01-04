@@ -3,7 +3,7 @@ title: Counting Primes Really Fast
 date: 2021-06-28
 tags: [Mathematics, Rust]
 image:
-    src: /assets/img/chalkboard.jpg
+    src: /assets/img/2021-06-28-counting-primes-really-fast/chalkboard.jpg
     alt: Chalkboard
 math: true
 ---
