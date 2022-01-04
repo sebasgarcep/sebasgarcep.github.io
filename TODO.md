@@ -1,10 +1,15 @@
 # Articles left to write
 
-- React Testing using Aria
+## High Priority
+- React Native Fitness Application with Testing
+- Social Login React Native App
+- Proofread the "From Zero To Data Ready articles", Add more tags
+- Get the retail project source code to a point where it's publicly shareable
+
+## Mid Priority
 - Kalman Filter, Extended Kalman Filter
-- Data Science Insights with Retail Project
-- Overview of Retail Project (This is basically the cover letter to my portfolio)
+- Dominoes AI
 
-# Things to do
-
-- Get the retail project source code to a point where it is publicly shareable
+## Low Priority
+- Pokemon AI
+- MonoSLAM
