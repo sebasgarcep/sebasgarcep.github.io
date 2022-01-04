@@ -1,24 +1,24 @@
 ---
 title: From Zero to Data-Ready (Part 3)
 date: 2021-06-01
-tags: [Data Engineering, Retail Project, From Zero to Data-Ready]
+tags: [Data Engineering, Retail Project, From Zero to Data-Ready, Python, Test Driven Development]
 image:
     src: /assets/img/2021-06-01-from-zero-to-data-ready-part-3/code.jpg
     alt: Code
 ---
 
-In [Part 2](/posts/from-zero-to-data-ready-part-2/) we created a data warehouse using sqitch. In this post we will focus on creating ETLs for our data. We will build our ETLs in Python using Test Driven Development as our paradigm.
+In [Part 2](/posts/from-zero-to-data-ready-part-2/) we created a data warehouse using sqitch. In this post we will focus on creating ETLs for our data. We will build our ETLs using Python under a Test Driven Development paradigm.
 
 # Testing our Data Pipelines
 
 Test Driven Development is a programming paradigm that emphasizes writing tests for each of the important aspects of our application before we even write the first line of code. The reasoning is that the tests serve as a specification of how the application or its components should behave. Therefore once the tests pass we know that the application is correct.
 
-In real life testing is never easy, though. Programs often have to make calls to external services we do not control. Thankfully, any robust testing framework should provide ways to either mock or intercept calls to the external environment. With this in mind, good tests are those that make sure that external services were called appropiately and that any internal state modification left the application in a correct state.
+In real life, testing is never this easy though. Programs often have to make calls to external services we do not control. Thankfully, any robust testing framework should provide ways to either mock or intercept calls to the external environment. With this in mind, good tests are those that make sure that external services were called appropiately and that any internal state modification left the application in a correct state.
 
 We need to build three data pipelines:
 - `process_raw_dump`: takes the `database.mdb` file and extracts all `.csv` files from it. These files are then written to a bucket in Google Cloud Storage.
-- `process_csv_dump`: downloads the `.csv` files that we are going to use to populate our data warehouse, processes and cleans the data, and uploads it to the `staging` schema of the data warehouse.
-- `populate_warehouse`: populates the `public` schema of the data warehouse using the tables in the `staging` schema.
+- `process_csv_dump`: downloads the `.csv` files from the bucket, cleans the data, and uploads it to the `staging` schema of the data warehouse.
+- `populate_warehouse`: populates the `public` schema of the data warehouse using the tables from the `staging` schema.
 
 All our pipelines will make use of Dependency Injection (DI) to simplify testing. For the uninitiated, DI is a design pattern where side effects are encapsulated into special objects. Whenever a functions needs to produce a specific side effect it asks for the object that encapsulates it as a parameter. To illustrate, assume the following function:
 
@@ -33,7 +33,7 @@ def is_user_tall(user_id):
     return user.height >= 2.0
 ```
 
-Testing this function would be hard, as it is making calls to a `cache` object, and a `server`. We can rewrite it as follows:
+Testing this function would be hard, we would have to intercept the `cache` and `server` imports to test them. We can rewrite it instead as:
 
 ```python
 def is_user_tall(cache, server, user_id):
@@ -42,7 +42,7 @@ def is_user_tall(cache, server, user_id):
         user = server.get(user_id)
     return user.height >= 2.0
 ```
-Its behaviour is the same, so as long as we remember to pass the `cache` and the `server`, nothing should break in our application. On the other hand, this makes testing easier, as we can effectively mock the `cache` and the `server` during testing, and write separate tests to verify the correctness of these objects.
+The behaviour should stay the same. So long as we remember to pass the `cache` and `server` objects nothing should break in our application. On the other hand, this makes testing easier, as we can effectively mock the `cache` and the `server` during testing, and write separate tests to verify the correctness of these objects.
 
 Let's begin by establishing a directory structure for our project:
 
@@ -61,7 +61,7 @@ tests/
 main.py
 ```
 
-The `main.py` file will serve as the entry point for our application. All files in `src/` will have a corresponding file in `tests/` testing its correctness. We will be using `unittest` to write our tests. This library comes with Python 3, so no setup is required. It automatically discovers tests in your source code by looking for files that start with `test_`. In each file it looks for functions prefixed with `test_` and classes prefixed with `Test`. It will recognize these as the tests and run them.
+The `main.py` file will serve as the entry point for our application. All files in `src/` will have a corresponding file in `tests/` testing its correctness. We will be using `unittest` to write our tests. This library comes with Python 3, so no setup is required. It automatically discovers tests in the source code by looking for files that start with `test_`. In each file it looks for functions prefixed with `test_` and classes prefixed with `Test`. It will recognize these as the tests and run them.
 
 Each job is gonna be a function that receives a `context` object as input. The `context` object serves as a wrapper for all injected dependencies. In our cases, these dependencies manage interactions with each of the following:
 - Google Cloud Storage
@@ -69,7 +69,7 @@ Each job is gonna be a function that receives a `context` object as input. The `
 - `mdbtools`
 - Data Warehouse (PostgreSQL)
 
-Let's begin by writing a test for the Local Environment dependency. Specifically, let's test the `get_jobs` function, which reads a comma-separated list of jobs to execute from the `JOBS` env variable, and returns them as a list:
+Let's begin by writing a test for the Local Environment dependency. Specifically, let's test the `get_jobs` function, which should read a comma-separated list of jobs to execute from the `JOBS` env variable, and should return a list of job names:
 
 ```python
 import unittest
@@ -136,7 +136,14 @@ class TestEnvironment(unittest.TestCase):
 
 Now both tests can pass and there are no side effects. All the other tests for injected dependencies follow a similar pattern, so we won't elaborate further on them.
 
-Now let's write a test for `process_raw_dump`. This pipeline's only job is to export tables from a downloaded `.mdb` file and upload them to Google Cloud Storage. Thankfully, we've implemented functions for downloading files from Google Cloud Storage, exporting a whole database and uploading a whole folder to Google Cloud Storage. Moreover, we've already tested that these functions work. Therefore, for this pipeline we only need to test that these functions are being called appropiately and in the correct order. The final result looks like this:
+Let's write a test for `process_raw_dump`. This pipeline's only job is to export tables from a downloaded `.mdb` file and upload them to Google Cloud Storage. Assume we already have implemented and tested the following functions:
+
+- `context.environment.create_blank_directory`: Creates a blank directory at the given path
+- `context.cloud.download_file`: Downloads a given file from Google Cloud Storage
+- `context.mdbtools.dump_tables`: Exports a whole database from an `.mdb` file to the local filesystem
+- `context.cloud.upload_bucket`: Uploads a whole folder to Google Cloud Storage
+
+Therefore, we only need to test that these functions are being called appropiately and in the correct order. The final result looks like this:
 
 ```python
 import unittest
@@ -164,21 +171,21 @@ class TestProcessRawDump(unittest.TestCase):
         expected_calls = [
             ("environment.create_blank_directory", "mdb_store"),
             ("environment.create_blank_directory", "csv_tables_store"),
-            ("cloud.download_file", "mdb_store", "MTrakTo.mdb"),
-            ("mdbtools.dump_tables", "mdb_store/MTrakTo.mdb", "csv_tables_store"),
+            ("cloud.download_file", "mdb_store", "database.mdb"),
+            ("mdbtools.dump_tables", "mdb_store/database.mdb", "csv_tables_store"),
             ("cloud.upload_bucket", "csv_tables_store")
         ]
 
         self.assertListEqual(context_calls, expected_calls)
 ```
 
-We could've gone the extra mile to mock Google Cloud, and tested whether the `.csv` files in the mocked Google Cloud are correct at the end of the job. We've finally opted not to, as this would've been cumbersome to write, instead opting for tests that leak elements of our implementation. In the end, software engineering is about tradeoffs, and in this case we choose to have leaky tests for the sake of simpler testing.
+We could've gone the extra mile to mock Google Cloud, and tested whether the `.csv` files in the mocked Google Cloud are correct at the end of the job. We finally opted not to, as this would've been cumbersome to write. Instead we opted for tests that leak elements of our implementation. In the end, software engineering is about tradeoffs, and in this case we choose to have leaky tests for the sake of having unit tests that are simpler to write.
 
 The tests for the other pipelines follow a similar pattern, so they are not worth discussing.
 
 # Building our Data Pipelines
 
-Finally, building our data pipelines is relatively trivial. The first part is building a framework to run our pipelines. We implement a `Runner` class where we register the jobs and our context object. This API works as follows:
+Finally, building our data pipelines is relatively trivial. The first part is writing a framework to run our pipelines. We implement a `Runner` class where we register the jobs and our context object:
 
 ```python
 from src.jobs.populate_warehouse import populate_warehouse
@@ -201,13 +208,13 @@ runner.run_jobs()
 Finally, we want to be able to dynamically change the jobs we want to run. In particular, we want to be able to run commands like:
 
 ```bash
-$ JOBS=process_csv_dump,populate_warehouse python3 ./main.py
+JOBS=process_csv_dump,populate_warehouse python3 ./main.py
 ```
 
 and have the framework run only thos jobs. To this effect we implement a simple `run_jobs` function that takes no arguments and handles the logic of reading the `JOBS` environment variable and triggering the right jobs. All of this is also implemented using the TDD paradigm to assure the correctness of our implementation.
 
-The final part is implementing our data pipelines. There is nothing to note about this process, so if the reader is interested in them, their implementation can be found in the source code for the project.
+The final part is implementing the data pipelines. There is nothing to note about this process, so if the reader is interested in them, their implementation can be found in the source code for the project.
 
 # Up Next
 
-Now that our data warehouse is populated, we have most of the required infrastructure in place. We're only missing a Business Intelligence tool in our stack. In [Part 4](/posts/from-zero-to-data-ready-part-4/) we will build it using CubeJS. Stay tuned!
+Now that our data warehouse has been populated, we have most of the required infrastructure in place. We are only missing a Business Intelligence tool in our stack. In [Part 4](/posts/from-zero-to-data-ready-part-4/) we will build it using CubeJS. Stay tuned!
