@@ -9,6 +9,7 @@
 ## Mid Priority
 - Kalman Filter, Extended Kalman Filter
 - Dominoes AI
+- Apply fix of the `data-proofer-ignore` bug fromo upstream.
 
 ## Low Priority
 - Pokemon AI
