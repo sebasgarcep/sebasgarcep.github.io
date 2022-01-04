@@ -57,6 +57,7 @@ build() {
 
 test() {
   bundle exec htmlproofer \
+    --checks-to-ignore ImageCheck \
     --disable-external \
     --check-html \
     --allow_hash_href \
