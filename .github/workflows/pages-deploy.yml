@@ -1,6 +1,6 @@
 name: 'Automatic build'
 on:
-  push:
+  create:
     branches:
       - release
     paths-ignore:
