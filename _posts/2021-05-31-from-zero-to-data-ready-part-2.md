@@ -1,5 +1,5 @@
 ---
-title: From Zero to Data-Ready (Part 2)
+title: "From Zero to Data-Ready (Part 2): Building a SQL Data Warehouse"
 date: 2021-05-31
 tags: [Data Engineering, Retail Project, From Zero to Data-Ready, Postgres, SQL, sqitch]
 image:
@@ -135,3 +135,7 @@ Finally, we need to point out that the denormalization process we covered in Par
 ## Up next
 
 Now that we have a data warehouse ready to go, we can begin thinking about our ETLs. This will be covered in [Part 3](/posts/from-zero-to-data-ready-part-3/) of the series.
+
+## Sources
+
+- [From Zero to Data Ready project](https://github.com/sebasgarcep/from_zero_to_data_ready)

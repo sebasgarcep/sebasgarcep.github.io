@@ -1,5 +1,5 @@
 ---
-title: From Zero to Data-Ready (Part 3)
+title: "From Zero to Data-Ready (Part 3): Writing Test Driven ETLs using Python"
 date: 2021-06-01
 tags: [Data Engineering, Retail Project, From Zero to Data-Ready, Python, Test Driven Development]
 image:
@@ -218,3 +218,7 @@ The final part is implementing the data pipelines. There is nothing to note abou
 # Up Next
 
 Now that our data warehouse has been populated, we have most of the required infrastructure in place. We are only missing a Business Intelligence tool in our stack. In [Part 4](/posts/from-zero-to-data-ready-part-4/) we will build it using CubeJS. Stay tuned!
+
+## Sources
+
+- [From Zero to Data Ready project](https://github.com/sebasgarcep/from_zero_to_data_ready)

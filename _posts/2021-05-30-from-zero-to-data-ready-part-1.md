@@ -1,5 +1,5 @@
 ---
-title: From Zero to Data-Ready (Part 1)
+title: "From Zero to Data-Ready (Part 1): Exploratory Data Analysis"
 date: 2021-05-30
 tags: [Data Engineering, Retail Project, From Zero to Data-Ready, Exploratory Data Analysis, Python, mdbtools]
 image:
@@ -142,3 +142,7 @@ The final result of whatever ETL processes we end up building later on should be
 ## Up next
 
 Now that we are done with our EDA and our data model definition, we have to build repeatable data pipelines that will keep our data in sync with whatever changes occur in the source database. We will cover this in [Part 2](/posts/from-zero-to-data-ready-part-2/).
+
+## Sources
+
+- [From Zero to Data Ready project](https://github.com/sebasgarcep/from_zero_to_data_ready)

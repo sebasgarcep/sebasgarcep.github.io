@@ -1,5 +1,5 @@
 ---
-title: From Zero to Data-Ready (Part 4)
+title: "From Zero to Data-Ready (Part 4): Building Analytics Dashboards using CubeJS and React"
 date: 2021-06-18
 tags: [Data Engineering, Retail Project, From Zero to Data-Ready, CubeJS, Postgres, SQL, NodeJS, React, Recharts, Material UI]
 image:
@@ -186,3 +186,7 @@ After these steps our application is working, and all that we need to do before 
 # Conclusion
 
 In this series of posts we explored a possible architecture for a data infrastructure, and how to build it while following best practices. I hope that the reader can take some inspiration from this. Building data infrastructures doesn't have to be hard!
+
+## Sources
+
+- [From Zero to Data Ready project](https://github.com/sebasgarcep/from_zero_to_data_ready)
