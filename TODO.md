@@ -1,8 +1,8 @@
 # Articles left to write
 
 ## High Priority
-- React Native Fitness Application with Testing and pictures
-- Something with the Spark ???
+- Show Pictures of Jogo Bonito
+- Something with Spark ???
 
 ## Mid Priority
 - Kalman Filter, Extended Kalman Filter
