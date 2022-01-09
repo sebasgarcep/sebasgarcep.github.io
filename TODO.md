@@ -5,7 +5,6 @@
 - Something with Spark ???
 
 ## Mid Priority
-- Kalman Filter, Extended Kalman Filter
 - Dominoes AI
 
 ## Low Priority
