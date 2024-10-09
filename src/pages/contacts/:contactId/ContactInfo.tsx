@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import { loader } from "./loader";
 
-export default function ContactRoute() {
+export function ContactInfo() {
   const { contact } = useLoaderData() as ReturnType<typeof loader>;
 
   return (
