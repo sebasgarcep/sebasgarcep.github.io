@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs } from "react-router-dom"
+import { LoaderFunctionArgs } from "react-router-dom";
 
 export const loader = ({ params }: LoaderFunctionArgs) => {
   const contact = {
@@ -12,4 +12,4 @@ export const loader = ({ params }: LoaderFunctionArgs) => {
     favorite: true,
   };
   return { contact };
-}
+};

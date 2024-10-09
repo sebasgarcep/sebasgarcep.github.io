@@ -31,7 +31,8 @@ export default function ContactRoute() {
           <p>
             <a
               target="_blank"
-              href={`https://twitter.com/${contact.twitter}`} rel="noreferrer"
+              href={`https://twitter.com/${contact.twitter}`}
+              rel="noreferrer"
             >
               {contact.twitter}
             </a>
