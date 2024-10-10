@@ -53,7 +53,7 @@ const socialItems: ISocialItem[] = [
     icon: LinkedInLogoIcon,
   },
   {
-    path: "mailto:sebasgarcep@hotmail.com",
+    path: "mailto:sebasgarcep@gmail.com",
     icon: Mail,
   },
 ];
