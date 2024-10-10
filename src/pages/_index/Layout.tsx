@@ -1,5 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
-import { Menu, Newspaper, Search, Tag, User } from "lucide-react";
+import { Mail, Menu, Newspaper, Search, Tag, User } from "lucide-react";
+import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,6 +10,12 @@ import { cn } from "@/lib/utils";
 interface IMenuItem {
   path: string;
   label: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  icon: any;
+}
+
+interface ISocialItem {
+  path: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any;
 }
@@ -28,6 +35,21 @@ const menuItems: IMenuItem[] = [
     path: "/tags",
     label: "Tags",
     icon: Tag,
+  },
+];
+
+const socialItems: ISocialItem[] = [
+  {
+    path: "https://github.com/sebasgarcep",
+    icon: GitHubLogoIcon,
+  },
+  {
+    path: "https://www.linkedin.com/in/sebastian-garrido-cepeda-20b090152/",
+    icon: LinkedInLogoIcon,
+  },
+  {
+    path: "mailto:sebasgarcep@hotmail.com",
+    icon: Mail,
   },
 ];
 
@@ -56,6 +78,15 @@ export function Layout() {
                   >
                     <Icon className="h-4 w-4" />
                     {item.label}
+                  </Link>
+                );
+              })}
+              {socialItems.map((item) => {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                const Icon = item.icon;
+                return (
+                  <Link key={item.path} to={item.path}>
+                    <Icon className="transition-all hover:text-primary h-4 w-4" />
                   </Link>
                 );
               })}
@@ -98,6 +129,11 @@ export function Layout() {
                       {item.label}
                     </Link>
                   );
+                })}
+                {socialItems.map((item) => {
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  const Icon = item.icon;
+                  return <Icon key={item.path} />;
                 })}
               </nav>
             </SheetContent>
