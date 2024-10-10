@@ -1,4 +1,4 @@
-import { RouteObject } from "react-router-dom";
+import { RouteRecord } from "vite-react-ssg";
 import { Layout } from "./Layout";
 
 import { route as contactIdRoute } from "../contacts.$contactId/route";
@@ -9,7 +9,7 @@ import { route as tagsRoute } from "../tags/route";
 import { route as tagInfoRoute } from "../tags.$tag/route";
 import { ErrorPage } from "../_error";
 
-export const route: RouteObject = {
+export const route: RouteRecord = {
   path: "/",
   element: <Layout />,
   errorElement: <ErrorPage />,

@@ -1,6 +1,6 @@
-import { RouteObject } from "react-router-dom";
+import { RouteRecord } from "vite-react-ssg";
 
-export const route: RouteObject = {
+export const route: RouteRecord = {
   path: "tags/:tag",
   element: null,
 };

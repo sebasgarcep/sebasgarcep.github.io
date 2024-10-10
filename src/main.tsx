@@ -1,12 +1,7 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { RouterProvider } from "react-router-dom";
-import { router } from "./router";
+import { RouteRecord, ViteReactSSG } from "vite-react-ssg";
+import { route as indexRoute } from "./pages/_index/route";
 import "./index.css";
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
-);
+const routes: RouteRecord[] = [indexRoute];
+
+export const createRoot = ViteReactSSG({ routes });
