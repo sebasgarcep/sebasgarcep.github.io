@@ -27,7 +27,7 @@ const jobTitle = "Software Engineer";
 
 const menuItems: IMenuItem[] = [
   {
-    path: "/posts",
+    path: "/posts/1",
     label: "Posts",
     icon: Newspaper,
   },
