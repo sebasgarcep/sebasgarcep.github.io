@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 
+import profileImg from "@/assets/profile.jpeg";
+
 interface IMenuItem {
   path: string;
   label: string;
@@ -19,6 +21,9 @@ interface ISocialItem {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any;
 }
+
+const fullName = "Sebastian Garrido";
+const jobTitle = "Software Engineer";
 
 const menuItems: IMenuItem[] = [
   {
@@ -60,6 +65,9 @@ export function Layout() {
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+              <img src={profileImg} className="rounded-full w-36 h-36" />
+              <h1>{fullName}</h1>
+              <h2>{jobTitle}</h2>
               {menuItems.map((item) => {
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 const Icon = item.icon;
@@ -109,6 +117,9 @@ export function Layout() {
             </SheetTrigger>
             <SheetContent side="left" className="flex flex-col">
               <nav className="grid gap-2 text-lg font-medium">
+                <img src={profileImg} className="rounded-full w-36 h-36" />
+                <h1>{fullName}</h1>
+                <h2>{jobTitle}</h2>
                 {menuItems.map((item) => {
                   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                   const Icon = item.icon;
