@@ -8,7 +8,7 @@ export const ReadPost = () => {
   return (
     <div>
       <h1>{data.title}</h1>
-      <h2>{data.date}</h2>
+      <h2>{new Date(data.date).toISOString()}</h2>
       <h3>{data.timeToRead} min</h3>
       <span>{data.text}</span>
       {data.tags ? (
