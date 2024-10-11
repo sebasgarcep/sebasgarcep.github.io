@@ -1,7 +1,6 @@
 import { RouteRecord } from "vite-react-ssg";
 import { Layout } from "./Layout";
 
-import { route as contactIdRoute } from "../contacts.$contactId/route";
 import { route as aboutRoute } from "../about/route";
 import { route as postsRoute } from "../posts.$page/route";
 import { route as readRoute } from "../read.$postId/route";
@@ -13,12 +12,5 @@ export const route: RouteRecord = {
   path: "/",
   element: <Layout />,
   errorElement: <ErrorPage />,
-  children: [
-    contactIdRoute,
-    aboutRoute,
-    postsRoute,
-    readRoute,
-    tagsRoute,
-    tagInfoRoute,
-  ],
+  children: [aboutRoute, postsRoute, readRoute, tagsRoute, tagInfoRoute],
 };

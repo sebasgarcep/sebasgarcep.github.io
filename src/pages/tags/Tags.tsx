@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import { loader } from "./loader";
+import { type loader } from "./loader";
 import { LoaderType } from "@/lib/types";
 
 export const Tags = () => {

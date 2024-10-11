@@ -9,14 +9,14 @@ import { cn } from "@/lib/utils";
 
 import profileImg from "@/assets/profile.jpeg";
 
-interface IMenuItem {
+interface MenuItem {
   path: string;
   label: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any;
 }
 
-interface ISocialItem {
+interface SocialItem {
   path: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any;
@@ -25,7 +25,7 @@ interface ISocialItem {
 const fullName = "Sebastian Garrido";
 const jobTitle = "Software Engineer";
 
-const menuItems: IMenuItem[] = [
+const menuItems: MenuItem[] = [
   {
     path: "/posts/1",
     label: "Posts",
@@ -43,7 +43,7 @@ const menuItems: IMenuItem[] = [
   },
 ];
 
-const socialItems: ISocialItem[] = [
+const socialItems: SocialItem[] = [
   {
     path: "https://github.com/sebasgarcep",
     icon: GitHubLogoIcon,
