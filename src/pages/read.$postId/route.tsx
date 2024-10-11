@@ -1,6 +1,9 @@
 import { RouteRecord } from "vite-react-ssg";
+import { loader } from "./loader";
+import { ReadPost } from "./ReadPost";
 
 export const route: RouteRecord = {
-  path: "posts/:postId",
-  element: null,
+  path: "read/:postId",
+  element: <ReadPost />,
+  loader,
 };

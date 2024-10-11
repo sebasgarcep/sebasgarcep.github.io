@@ -1,5 +1,5 @@
 import { LoaderType } from "@/lib/types";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { type loader } from "./loader";
 
 export const PostHistory = () => {
@@ -8,7 +8,7 @@ export const PostHistory = () => {
     <div>
       {data.posts.map((item) => (
         <div key={item.id}>
-          <h1>{item.title}</h1>
+          <Link to={`/read/${item.id}`}>{item.title}</Link>
           <h2>{new Date(item.date).toISOString()}</h2>
           <h3>{item.timeToRead} min</h3>
           <span>{item.preview}</span>
