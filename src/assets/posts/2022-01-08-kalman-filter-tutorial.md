@@ -1,11 +1,11 @@
 ---
+id: kalman-filter-tutorial
 title: Understanding the Kalman Filter
 date: 2022-01-08
 tags: [Mathematics, Data Assimilation, Kalman Filter, Rust]
 image:
     src: /assets/img/2022-01-08-kalman-filter/preview.jpg
     alt: Boats on a lake
-math: true
 ---
 
 Society depends on having correct estimates of what may happen. Whether it is the climate or traffic, humans have built models of reality which help us make better decisions. But any model is bound to have a margin of error with respect to reality, and as time passes the model will diverge from reality. To prevent this we would like to integrate observations from reality into the model from time to time. But we run into the problem that observations of reality are often incomplete or have a margin of error themselves. The Kalman Filter is a method of combining both sources of information (model state with observations) in a way that reduces the margin of error in the output.

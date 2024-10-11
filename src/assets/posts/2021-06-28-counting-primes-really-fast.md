@@ -1,11 +1,11 @@
 ---
+id: counting-primes-really-fast
 title: Counting Primes Really Fast
 date: 2021-06-28
 tags: [Mathematics, Rust]
 image:
     src: /assets/img/2021-06-28-counting-primes-really-fast/chalkboard.jpg
     alt: Chalkboard
-math: true
 ---
 
 Suppose you are given a very large number, for example $n = 10^{12}$, and you wish to know how many numbers equal to or less than $n$ are prime. This is the prime counting function, normally denotes as $\pi(n)$. In this article we will explore some of the methods to efficiently calculate $\pi(n)$, and we will benchmark each in Rust.
