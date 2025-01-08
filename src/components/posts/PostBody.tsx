@@ -24,12 +24,18 @@ export const PostBody: FC<PostBodyProps> = ({ text }) => {
             <pre style={{ display: "inline-block" }}>
               <code
                 className="language-sh"
-                style={{ fontSize: "12px", padding: "5px" }}
+                style={{ fontSize: "14px", padding: "5px" }}
               >
                 {attrs.children}
               </code>
             </pre>
           );
+        },
+        p(attrs) {
+          return <p className="my-4 text-gray-300">{attrs.children}</p>;
+        },
+        h1(attrs) {
+          return <h1 className="text-2xl text-white">{attrs.children}</h1>;
         },
       }}
       className="text-white mt-2"
