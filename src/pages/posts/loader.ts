@@ -11,7 +11,7 @@ export interface PostHistoryProps {
   posts: PostPreview[];
 }
 
-const PREVIEW_SIZE = 250;
+const PREVIEW_SIZE = 100;
 export const loader = async (): Promise<PostHistoryProps> => {
   const posts = await getAllPosts();
   return {
