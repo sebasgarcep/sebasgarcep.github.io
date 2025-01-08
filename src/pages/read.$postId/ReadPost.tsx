@@ -4,6 +4,7 @@ import { type loader } from "./loader";
 import { PostTitle } from "@/components/posts/PostTitle";
 import { PostDate } from "@/components/posts/PostDate";
 import { PostBody } from "@/components/posts/PostBody";
+import { Tag } from "@/components/Tag";
 
 // FIXME: INCLUDE FURTHER READING or NEXT/PREVIOUS POST
 export const ReadPost = () => {
@@ -14,11 +15,11 @@ export const ReadPost = () => {
       <PostDate date={new Date(data.date)} />
       <PostBody text={data.text} />
       {data.tags ? (
-        <ul>
+        <div className="flex flex-row items-start gap-2">
           {data.tags.map((item) => (
-            <li key={item}>{item}</li>
+            <Tag key={item} title={item} />
           ))}
-        </ul>
+        </div>
       ) : null}
     </div>
   );

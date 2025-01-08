@@ -1,14 +1,15 @@
 import { useLoaderData } from "react-router-dom";
 import { type loader } from "./loader";
 import { LoaderType } from "@/lib/types";
+import { Tag } from "@/components/Tag";
 
 export const Tags = () => {
   const tags = useLoaderData() as LoaderType<typeof loader>;
   return (
-    <ul>
+    <div className="flex flex-row items-start gap-2">
       {tags.map((item) => (
-        <li key={item}>{item}</li>
+        <Tag key={item} title={item} />
       ))}
-    </ul>
+    </div>
   );
 };
