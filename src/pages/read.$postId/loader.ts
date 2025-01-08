@@ -5,13 +5,10 @@ import { getAllPosts } from "@/lib/markdown";
 export interface ReadPostProps {
   title: string;
   date: number;
-  timeToRead: number;
   text: string;
   tags?: string[];
 }
 
-// FIXME: DEDUP THIS
-const WORDS_PER_MINUTE = 240;
 export const loader = async ({
   params,
 }: LoaderFunctionArgs): Promise<ReadPostProps> => {
@@ -23,7 +20,6 @@ export const loader = async ({
   return {
     title: post.title,
     date: post.date.getTime(),
-    timeToRead: Math.ceil(post.text.split(" ").length / WORDS_PER_MINUTE),
     text: post.text,
     tags: post.tags,
   };

@@ -1,6 +1,10 @@
-import { LoaderType } from "@/lib/types";
 import { Link, useLoaderData } from "react-router-dom";
-import { format } from "date-fns";
+
+import { LoaderType } from "@/lib/types";
+import { PostBody } from "@/components/posts/PostBody";
+import { PostDate } from "@/components/posts/PostDate";
+import { PostTitle } from "@/components/posts/PostTitle";
+
 import { type loader } from "./loader";
 
 export const PostHistory = () => {
@@ -13,16 +17,9 @@ export const PostHistory = () => {
           key={item.id}
           className="hover:scale-105 transition-all"
         >
-          <div
-            className="text-2xl font-bold"
-            style={{ color: "lab(80.574 30.6 -11.24)" }}
-          >
-            {item.title}
-          </div>
-          <h2 className="text-gray-300 text-xs">
-            {format(new Date(item.date), "LLLL d, yyyy")}
-          </h2>
-          <span className="text-white">{item.preview}...</span>
+          <PostTitle title={item.title} />
+          <PostDate date={new Date(item.date)} />
+          <PostBody text={`${item.preview}...`} />
         </Link>
       ))}
     </div>
