@@ -85,7 +85,7 @@ export function Layout() {
           </Sheet>
         </header>
 
-        <main>
+        <main className="max-w-3xl">
           <Outlet />
         </main>
       </div>
