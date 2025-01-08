@@ -1,6 +1,9 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import hljs from "highlight.js";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
+import "katex/dist/katex.min.css";
 import "highlight.js/styles/vs2015.css";
 
 export interface PostBodyProps {
@@ -8,12 +11,22 @@ export interface PostBodyProps {
 }
 
 export const PostBody: FC<PostBodyProps> = ({ text }) => {
+  const [shouldRender, setShouldRender] = useState(false);
+
   useEffect(() => {
     hljs.highlightAll();
+  }, [shouldRender]);
+
+  useEffect(() => {
+    setShouldRender(true);
   }, []);
+
+  if (!shouldRender) return null;
 
   return (
     <Markdown
+      remarkPlugins={[remarkMath]}
+      rehypePlugins={[rehypeKatex]}
       components={{
         code(attrs) {
           return attrs.className ? (
