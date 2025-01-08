@@ -5,5 +5,5 @@ export interface PostBodyProps {
 }
 
 export const PostBody: FC<PostBodyProps> = ({ text }) => (
-  <span className="text-white">{text}</span>
+  <div className="text-white mt-2">{text}</div>
 );

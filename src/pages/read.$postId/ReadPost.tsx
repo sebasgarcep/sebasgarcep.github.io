@@ -4,7 +4,7 @@ import { type loader } from "./loader";
 import { PostTitle } from "@/components/posts/PostTitle";
 import { PostDate } from "@/components/posts/PostDate";
 import { PostBody } from "@/components/posts/PostBody";
-import { Tag } from "@/components/Tag";
+import { TagList } from "@/components/tags/TagList";
 
 // FIXME: INCLUDE FURTHER READING or NEXT/PREVIOUS POST
 export const ReadPost = () => {
@@ -14,13 +14,9 @@ export const ReadPost = () => {
       <PostTitle title={data.title} />
       <PostDate date={new Date(data.date)} />
       <PostBody text={data.text} />
-      {data.tags ? (
-        <div className="flex flex-row items-start gap-2">
-          {data.tags.map((item) => (
-            <Tag key={item} title={item} />
-          ))}
-        </div>
-      ) : null}
+      <div className="py-4">
+        {data.tags ? <TagList tags={data.tags} /> : null}
+      </div>
     </div>
   );
 };
