@@ -13,3 +13,11 @@
   font-size: large;
   font-weight: bold;
 }
+
+.PostBody :not(pre)>code {
+  border-radius: 5px;
+  white-space: normal;
+  padding: .15em .2em .2em;
+  color: white;
+  background-color: rgba(115,124,153,.2);
+}
