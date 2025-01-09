@@ -371,8 +371,12 @@ But the choice of $a$ we are interested in is $a = \pi(n^{1 / 4})$. With this ch
 
 $$
 \begin{equation}
-\pi(n) = \phi(n, a) + \frac{1}{2} (b + a - 2) (b - a + 1) - \sum_{a < i \leq b} \pi(n / p_i) - \sum_{a < i \leq c}
+\begin{align*}
+\pi(n)
+&= \phi(n, a) + \frac{1}{2} (b + a - 2) (b - a + 1) - \sum_{a < i \leq b} \pi(n / p_i) \\
+&- \sum_{a < i \leq c}
 \sum_{i \leq j \leq b_i} \{ \pi(n / p_i p_j) - (j - 1) \}
+\end{align*}
 \end{equation}
 $$
 
