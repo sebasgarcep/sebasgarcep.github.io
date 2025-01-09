@@ -1,6 +1,7 @@
 ---
 id: kalman-filter-tutorial
 title: Understanding the Kalman Filter
+subtitle: Or how to ensure estimates remain correct over time.
 date: 2022-01-08
 tags: [Mathematics, Data Assimilation, Kalman Filter, Rust]
 image:

@@ -1,6 +1,7 @@
 ---
 id: counting-primes-really-fast
 title: Counting Primes Really Fast
+subtitle: Counting primes is hard, but it need not be slow
 date: 2021-06-28
 tags: [Mathematics, Rust]
 image:

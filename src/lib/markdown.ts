@@ -9,6 +9,7 @@ import hljs from "highlight.js";
 export interface Markdown {
   id: string;
   title: string;
+  subtitle: string;
   date: Date;
   tags?: string[];
   image?: {
@@ -21,6 +22,7 @@ export interface Markdown {
 const metadataSchema = zod.object({
   id: zod.string(),
   title: zod.string(),
+  subtitle: zod.string(),
   date: zod.string(),
   tags: zod.array(zod.string()).optional(),
   image: zod

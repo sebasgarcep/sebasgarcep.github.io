@@ -1,6 +1,7 @@
 ---
 id: social-login-app
 title: Writing a React Native App using Expo and Google Social Login
+subtitle: This tutorial will show how to build an app on Expo with SSO capabilities
 date: 2022-01-03
 tags: [Software Engineering, React Native, Expo, Social Login, Express, Passport, Google]
 image:

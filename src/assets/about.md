@@ -1,6 +1,7 @@
 ---
 id: about
 title: About Me
+subtitle: All the information about me
 date: 2021-06-28
 ---
 
