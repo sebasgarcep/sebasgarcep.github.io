@@ -1,5 +1,6 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Newspaper, Tag, User } from "lucide-react";
+import { useEffect } from "react";
 
 interface MenuItem {
   path: string;
@@ -27,6 +28,14 @@ const menuItems: MenuItem[] = [
 ];
 
 export function Layout() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.location.pathname === "/") {
+      navigate("/posts");
+    }
+  }, [navigate]);
+
   return (
     <div className="bg-slate-900 flex flex-col min-h-screen max-w-full items-center">
       <header className="flex flex-row gap-8 justify-center py-4">
