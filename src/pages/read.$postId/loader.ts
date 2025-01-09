@@ -29,8 +29,9 @@ export const loader = async ({
   }
 
   const post = posts[postIndex];
-  const previousPost = postIndex > 0 ? posts[postIndex - 1] : null;
-  const nextPost = postIndex < posts.length - 1 ? posts[postIndex + 1] : null;
+  const nextPost = postIndex > 0 ? posts[postIndex - 1] : null;
+  const previousPost =
+    postIndex < posts.length - 1 ? posts[postIndex + 1] : null;
   return {
     post: {
       title: post.title,
