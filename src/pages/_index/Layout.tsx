@@ -1,8 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import { Menu, Newspaper, Tag, User } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Newspaper, Tag, User } from "lucide-react";
 
 interface MenuItem {
   path: string;
@@ -31,60 +28,27 @@ const menuItems: MenuItem[] = [
 
 export function Layout() {
   return (
-    <div className="bg-slate-800 grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-      <div className="hidden md:block">
-        <div className="flex h-full max-h-screen flex-col gap-2">
-          <Sidebar />
-        </div>
-      </div>
-      <div className="flex flex-col">
-        <header className="flex h-14 items-center gap-4 px-4 lg:h-[60px] lg:px-6">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="shrink-0 md:hidden"
-              >
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle navigation menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent
-              side="left"
-              className="flex flex-col bg-slate-800 border-r-0"
+    <div className="bg-slate-900 flex flex-col min-h-screen max-w-full items-center">
+      <header className="flex flex-row gap-8 justify-center py-4">
+        {menuItems.map((item) => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          const Icon = item.icon;
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-gray-300 hover:text-gray-100"
             >
-              <Sidebar />
-            </SheetContent>
-          </Sheet>
-        </header>
+              <Icon className="h-4 w-4" />
+              {item.label}
+            </Link>
+          );
+        })}
+      </header>
 
-        <main className="max-w-sm md:max-w-2xl text-justify">
-          <Outlet />
-        </main>
-      </div>
+      <main className="max-w-sm md:max-w-2xl text-justify">
+        <Outlet />
+      </main>
     </div>
-  );
-}
-
-function Sidebar() {
-  return (
-    <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-      <div className="mb-4" />
-      {menuItems.map((item) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const Icon = item.icon;
-        return (
-          <Link
-            key={item.path}
-            to={item.path}
-            className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-gray-300 hover:text-gray-100"
-          >
-            <Icon className="h-4 w-4" />
-            {item.label}
-          </Link>
-        );
-      })}
-    </nav>
   );
 }

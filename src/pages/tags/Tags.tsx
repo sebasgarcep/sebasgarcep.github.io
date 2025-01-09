@@ -5,5 +5,9 @@ import { TagList } from "@/components/tags/TagList";
 
 export const Tags = () => {
   const tags = useLoaderData() as LoaderType<typeof loader>;
-  return <TagList tags={tags} />;
+  return (
+    <div className="px-6">
+      <TagList tags={tags} />
+    </div>
+  );
 };
