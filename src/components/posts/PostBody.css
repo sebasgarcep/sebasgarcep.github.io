@@ -1,0 +1,15 @@
+.PostBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.PostBody h1 {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.PostBody h2 {
+  font-size: large;
+  font-weight: bold;
+}
