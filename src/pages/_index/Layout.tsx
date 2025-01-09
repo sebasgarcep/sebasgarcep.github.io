@@ -85,7 +85,7 @@ export function Layout() {
           </Sheet>
         </header>
 
-        <main className="max-w-2xl text-justify">
+        <main className="max-w-sm md:max-w-2xl text-justify">
           <Outlet />
         </main>
       </div>

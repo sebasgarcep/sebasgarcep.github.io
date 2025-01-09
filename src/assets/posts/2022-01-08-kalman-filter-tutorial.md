@@ -80,7 +80,11 @@ $$
 An application of the [Woodbury matrix identity](https://en.wikipedia.org/wiki/Woodbury_matrix_identity) shows that
 
 $$
-(P_{\text{pred}}^{-1} + H^T R^{-1} H)^{-1} = P_{\text{pred}} - P_{\text{pred}} H^T (H P_{\text{pred}} H^T + R)^{-1} H P_{\text{pred}} = P_{\text{pred}} - K H P_{\text{pred}}
+\begin{align*}
+(P_{\text{pred}}^{-1} + H^T R^{-1} H)^{-1}
+&= P_{\text{pred}} - P_{\text{pred}} H^T (H P_{\text{pred}} H^T + R)^{-1} H P_{\text{pred}} \\
+&= P_{\text{pred}} - K H P_{\text{pred}} \\
+\end{align*}
 $$
 
 where the last part follows from the definition of the Kalman Gain $K$. Therefore
