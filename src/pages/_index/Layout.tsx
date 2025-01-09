@@ -1,10 +1,8 @@
 import { Link, Outlet } from "react-router-dom";
-import { Mail, Menu, Newspaper, Tag, User } from "lucide-react";
-import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
+import { Menu, Newspaper, Tag, User } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import profileImg from "@/assets/profile.jpeg";
 
 interface MenuItem {
   path: string;
@@ -12,15 +10,6 @@ interface MenuItem {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any;
 }
-
-interface SocialItem {
-  path: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  icon: any;
-}
-
-const fullName = "Sebastian Garrido";
-const jobTitle = "Software Engineer";
 
 const menuItems: MenuItem[] = [
   {
@@ -37,21 +26,6 @@ const menuItems: MenuItem[] = [
     path: "/tags",
     label: "Tags",
     icon: Tag,
-  },
-];
-
-const socialItems: SocialItem[] = [
-  {
-    path: "https://github.com/sebasgarcep",
-    icon: GitHubLogoIcon,
-  },
-  {
-    path: "https://www.linkedin.com/in/sebastian-garrido-cepeda-20b090152/",
-    icon: LinkedInLogoIcon,
-  },
-  {
-    path: "mailto:sebasgarcep@gmail.com",
-    icon: Mail,
   },
 ];
 
@@ -96,12 +70,6 @@ export function Layout() {
 function Sidebar() {
   return (
     <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-      <img
-        src={profileImg}
-        className="rounded-full w-36 h-36 justify-self-center my-4"
-      />
-      <h1 className="text-gray-100 justify-self-center text-lg">{fullName}</h1>
-      <h2 className="text-gray-100 justify-self-center">{jobTitle}</h2>
       <div className="mb-4" />
       {menuItems.map((item) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -117,18 +85,6 @@ function Sidebar() {
           </Link>
         );
       })}
-      <div className="mb-6" />
-      <div className="flex flex-row gap-8 justify-center">
-        {socialItems.map((item) => {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          const Icon = item.icon;
-          return (
-            <Link key={item.path} to={item.path}>
-              <Icon className="transition-all text-gray-300 hover:text-gray-100 h-5 w-5" />
-            </Link>
-          );
-        })}
-      </div>
     </nav>
   );
 }

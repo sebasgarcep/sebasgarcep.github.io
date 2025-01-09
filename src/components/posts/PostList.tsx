@@ -17,8 +17,8 @@ export const PostList: FC<PostListProps> = ({ posts }) => {
     <div className="flex flex-col px-6 py-4 gap-8">
       {posts.map((item) => (
         <Link
-          to={`/read/${item.id}`}
           key={item.id}
+          to={`/read/${item.id}`}
           className="hover:scale-105 transition-all"
         >
           <PostTitle title={item.title} />
