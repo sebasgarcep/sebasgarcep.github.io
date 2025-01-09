@@ -129,7 +129,7 @@ and therefore the update formula for the covariance is
 
 $$
 P_{\text{corr}} = (I - K H) P_{\text{pred}} (I - K H)^T + K R K^T
-$$d
+$$
 
 which finalizes the proof.
 
