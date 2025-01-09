@@ -35,26 +35,32 @@ const socialItems: SocialItem[] = [
 export const About = () => {
   const { about } = useLoaderData() as LoaderType<typeof loader>;
   return (
-    <div className="px-6">
-      <img
-        src={profileImg}
-        className="rounded-full w-36 h-36 justify-self-center my-4"
-      />
-      <h1 className="text-gray-100 justify-self-center text-lg">{fullName}</h1>
-      <h2 className="text-gray-100 justify-self-center">{jobTitle}</h2>
-      <div className="flex flex-row gap-8 justify-center">
-        {socialItems.map((item) => {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          const Icon = item.icon;
-          return (
-            <Link key={item.path} to={item.path}>
-              <Icon className="transition-all text-gray-300 hover:text-gray-100 h-5 w-5" />
-            </Link>
-          );
-        })}
+    <div className="px-6 grid grid-cols-1 md:grid-cols-2">
+      <div className="mb-4">
+        <img
+          src={profileImg}
+          className="rounded-full w-36 h-36 justify-self-center my-4"
+        />
+        <h1 className="text-gray-100 justify-self-center text-lg">
+          {fullName}
+        </h1>
+        <h2 className="text-gray-100 justify-self-center">{jobTitle}</h2>
+        <div className="flex flex-row gap-8 justify-center mt-4">
+          {socialItems.map((item) => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            const Icon = item.icon;
+            return (
+              <Link key={item.path} to={item.path}>
+                <Icon className="transition-all text-gray-300 hover:text-gray-100 h-6 w-6" />
+              </Link>
+            );
+          })}
+        </div>
       </div>
-      <PostTitle title={about.title} />
-      <PostBody text={about.text} />
+      <div>
+        <PostTitle title={about.title} />
+        <PostBody text={about.text} />
+      </div>
     </div>
   );
 };
