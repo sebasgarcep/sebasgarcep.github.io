@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  overflow-wrap: break-word;
 }
 
 .PostBody h1 {
@@ -24,4 +25,10 @@
 
 .PostBody a {
   color: lab(80.574 30.6 -11.24);
+}
+
+.PostBody li {
+  display: list-item;
+  list-style-type: disc;
+  list-style-position: outside;
 }
