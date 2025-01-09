@@ -57,8 +57,8 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.13)
       vite-react-ssg:
-        specifier: ^0.7.3
-        version: 0.7.3(prettier@3.3.3)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@5.4.8(@types/node@22.7.5))
+        specifier: ^0.8.3
+        version: 0.8.3(prettier@3.3.3)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@5.4.8(@types/node@22.7.5))
     devDependencies:
       '@eslint/js':
         specifier: ^9.11.1
@@ -1336,6 +1336,9 @@ packages:
     resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}
     engines: {node: '>=6'}
 
+  eventemitter3@5.0.1:
+    resolution: {integrity: sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==}
+
   fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
 
@@ -1845,6 +1848,14 @@ packages:
     resolution: {integrity: sha512-LaNjtRWUBY++zB5nE/NwcaoMylSPk+S+ZHNB1TzdbMJMny6dynpAGt7X/tl/QYq3TIeE6nxHppbo2LGymrG5Pw==}
     engines: {node: '>=10'}
 
+  p-queue@8.0.1:
+    resolution: {integrity: sha512-NXzu9aQJTAzbBqOt2hwsR63ea7yvxJc0PwN/zobNAudYfb1B7R08SzB4TsLeSbUCuG467NhnoT0oO6w1qRO+BA==}
+    engines: {node: '>=18'}
+
+  p-timeout@6.1.4:
+    resolution: {integrity: sha512-MyIV3ZA/PmyBN/ud8vV9XzwTrNtR4jFrObymZYnZqMmW0zA8Z17vnT0rBgFE/TlohB+YCHqXMgZzb3Csp49vqg==}
+    engines: {node: '>=14.16'}
+
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
 
@@ -2331,18 +2342,27 @@ packages:
   util@0.12.5:
     resolution: {integrity: sha512-kZf/K6hEIrWHI6XqOFUiiMa+79wE/D8Q+NCNAWclkyg3b4d2k7s0QGepNjiABc+aR3N1PAyHL7p6UcLY6LmrnA==}
 
-  vite-react-ssg@0.7.3:
-    resolution: {integrity: sha512-9LCyk2WeuVfO7HSFPCe9eS1bU9eiHz9MjVd0WY4SS344j3cdkUBs0FKq/jCdv2/KkZlgEyv4GHpC7rDeJ1osIg==}
+  vite-react-ssg@0.8.3:
+    resolution: {integrity: sha512-+yahXkAXI0kdCBTC3Gfa781TG/YLhofr7pk0djVdvSoS5dnzpaKckeqpKHmDLWzYG9OXbDuASpx071ua4QHdtw==}
     hasBin: true
     peerDependencies:
-      critters: ^0.0.19
+      '@tanstack/react-router': '*'
+      '@tanstack/start': '*'
+      beasties: ^0.1.0
+      critters: ^0.0.24
       prettier: '*'
-      react: ^18.0.0
-      react-dom: ^18.0.0
+      react: ^17.0.2||^18.0.0
+      react-dom: ^17.0.2||^18.0.0
       react-router-dom: ^6.14.1
       styled-components: ^6.0.0
       vite: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
     peerDependenciesMeta:
+      '@tanstack/react-router':
+        optional: true
+      '@tanstack/start':
+        optional: true
+      beasties:
+        optional: true
       critters:
         optional: true
       prettier:
@@ -3711,6 +3731,8 @@ snapshots:
 
   event-target-shim@5.0.1: {}
 
+  eventemitter3@5.0.1: {}
+
   fast-deep-equal@3.1.3: {}
 
   fast-diff@1.3.0: {}
@@ -4232,6 +4254,13 @@ snapshots:
   p-locate@5.0.0:
     dependencies:
       p-limit: 3.1.0
+
+  p-queue@8.0.1:
+    dependencies:
+      eventemitter3: 5.0.1
+      p-timeout: 6.1.4
+
+  p-timeout@6.1.4: {}
 
   package-json-from-dist@1.0.1: {}
 
@@ -4780,13 +4809,14 @@ snapshots:
       is-typed-array: 1.1.13
       which-typed-array: 1.1.15
 
-  vite-react-ssg@0.7.3(prettier@3.3.3)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@5.4.8(@types/node@22.7.5)):
+  vite-react-ssg@0.8.3(prettier@3.3.3)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(vite@5.4.8(@types/node@22.7.5)):
     dependencies:
       '@remix-run/web-fetch': 4.4.2
       fs-extra: 11.2.0
       html5parser: 2.0.2
       jsdom: 24.1.3
       kolorist: 1.8.0
+      p-queue: 8.0.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-helmet-async: 1.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
