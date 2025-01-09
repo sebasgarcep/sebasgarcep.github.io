@@ -6,6 +6,7 @@ import { PostDate } from "@/components/posts/PostDate";
 import { PostTitle } from "@/components/posts/PostTitle";
 
 import { type loader } from "./loader";
+import { TagList } from "@/components/tags/TagList";
 
 export const PostHistory = () => {
   const data = useLoaderData() as LoaderType<typeof loader>;
@@ -20,6 +21,9 @@ export const PostHistory = () => {
           <PostTitle title={item.title} />
           <PostDate date={new Date(item.date)} />
           <PostBody text={`${item.preview}...`} />
+          <div className="mt-4">
+            {item.tags && <TagList tags={item.tags} />}
+          </div>
         </Link>
       ))}
     </div>

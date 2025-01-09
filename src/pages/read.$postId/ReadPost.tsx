@@ -14,7 +14,7 @@ export const ReadPost = () => {
       <PostTitle title={data.title} />
       <PostDate date={new Date(data.date)} />
       <PostBody text={data.text} />
-      <div className="py-4">
+      <div className="my-8">
         {data.tags ? <TagList tags={data.tags} /> : null}
       </div>
     </div>

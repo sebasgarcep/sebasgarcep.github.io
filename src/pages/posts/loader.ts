@@ -5,6 +5,7 @@ export interface PostPreview {
   title: string;
   date: number;
   preview: string;
+  tags?: string[];
 }
 
 export interface PostHistoryProps {
@@ -20,6 +21,7 @@ export const loader = async (): Promise<PostHistoryProps> => {
       title: item.title,
       date: item.date.getTime(),
       preview: item.text.slice(0, PREVIEW_SIZE),
+      tags: item.tags,
     })),
   };
 };
