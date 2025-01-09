@@ -2,6 +2,9 @@ import { parse } from "yaml";
 import * as zod from "zod";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
+import markdownit from "markdown-it";
+import katex from "katex";
+import hljs from "highlight.js";
 
 export interface Markdown {
   id: string;
@@ -28,6 +31,59 @@ const metadataSchema = zod.object({
     .optional(),
 });
 
+function renderLatex(text: string) {
+  // Qllowing newlines inside of `$$...$$`
+  text = text.replace(/\$\$([^$]+?)\$\$/g, (_match, expression: string) => {
+    try {
+      return katex.renderToString(expression, {
+        displayMode: true,
+        output: "html",
+      });
+    } catch (error) {
+      console.log(expression);
+      throw error;
+    }
+  });
+
+  // Not allowing newlines or space inside of `$...$`
+  text = text.replace(/\$([^$]+?)\$/g, (_match, expression: string) => {
+    try {
+      return katex.renderToString(expression, {
+        displayMode: false,
+        output: "html",
+      });
+    } catch (error) {
+      console.log(expression);
+      throw error;
+    }
+  });
+
+  return text;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+const md = markdownit({
+  html: true,
+  highlight: function (str, lang) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return (
+          '<pre><code class="hljs">' +
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument
+          hljs.highlight(str, { language: lang, ignoreIllegals: true }).value +
+          "</code></pre>"
+        );
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (__) {
+        /* empty */
+      }
+    }
+
+    return "";
+  },
+});
+
 export const parseMarkdown = (contents: string): Markdown => {
   contents = contents.trim();
 
@@ -44,10 +100,16 @@ export const parseMarkdown = (contents: string): Markdown => {
 
   const beginPosition = contents.indexOf("---", 3);
 
+  const rawText = contents.slice(beginPosition + 3).trim();
+  const withoutLatex = renderLatex(rawText);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+  const text = md.render(withoutLatex);
+
   return {
     ...metadata,
     date: new Date(metadata.date),
-    text: contents.slice(beginPosition + 3).trim(),
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    text,
   };
 };
 
