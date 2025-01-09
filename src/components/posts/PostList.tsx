@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { TagList } from "@/components/tags/TagList";
-import { PostPreview } from "@/pages/posts/loader";
+import { PostPreview } from "@/lib/preview";
 
 import { PostBody } from "./PostBody";
 import { PostDate } from "./PostDate";

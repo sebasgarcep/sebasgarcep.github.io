@@ -61,16 +61,13 @@ function renderLatex(text: string) {
   return text;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
 const md = markdownit({
   html: true,
   highlight: function (str, lang) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     if (lang && hljs.getLanguage(lang)) {
       try {
         return (
           '<pre><code class="hljs">' +
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument
           hljs.highlight(str, { language: lang, ignoreIllegals: true }).value +
           "</code></pre>"
         );
@@ -102,13 +99,13 @@ export const parseMarkdown = (contents: string): Markdown => {
 
   const rawText = contents.slice(beginPosition + 3).trim();
   const withoutLatex = renderLatex(rawText);
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+
   const text = md.render(withoutLatex);
 
   return {
     ...metadata,
     date: new Date(metadata.date),
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     text,
   };
 };
@@ -119,12 +116,17 @@ const getAllPostFilepaths = async (): Promise<string[]> => {
   return filenames.map((item) => path.join(basePath, item));
 };
 
+let postData: Markdown[] | null = null;
 export const getAllPosts = async (): Promise<Markdown[]> => {
-  const filepaths = await getAllPostFilepaths();
-  const fileContents = await Promise.all(
-    filepaths.map((filepath) => fs.readFile(filepath, "utf-8")),
-  );
-  return fileContents
-    .map((item) => parseMarkdown(item))
-    .sort((a, b) => b.date.getTime() - a.date.getTime());
+  if (postData === null || process.env.NODE_ENV === "development") {
+    const filepaths = await getAllPostFilepaths();
+    const fileContents = await Promise.all(
+      filepaths.map((filepath) => fs.readFile(filepath, "utf-8")),
+    );
+    postData = fileContents
+      .map((item) => parseMarkdown(item))
+      .sort((a, b) => b.date.getTime() - a.date.getTime());
+  }
+
+  return postData;
 };
