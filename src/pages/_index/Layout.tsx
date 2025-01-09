@@ -1,5 +1,13 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  ScrollRestoration,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { Newspaper, Tag, User } from "lucide-react";
+import { Head } from "vite-react-ssg";
+import { NavigationContextProvider } from "@/context/navigation";
 import { useEffect } from "react";
 
 interface MenuItem {
@@ -17,7 +25,7 @@ const menuItems: MenuItem[] = [
   },
   {
     path: "/about",
-    label: "About",
+    label: "About Me",
     icon: User,
   },
   {
@@ -27,14 +35,29 @@ const menuItems: MenuItem[] = [
   },
 ];
 
-export function Layout() {
+export function Index() {
+  return (
+    <>
+      <Head>
+        <title>Sebastian&apos;s Blog</title>
+      </Head>
+      <ScrollRestoration />
+      <NavigationContextProvider>
+        <Layout />
+      </NavigationContextProvider>
+    </>
+  );
+}
+
+function Layout() {
+  const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (window.location.pathname === "/") {
+    if (location.pathname === "/") {
       navigate("/posts");
     }
-  }, [navigate]);
+  }, [location.pathname, navigate]);
 
   return (
     <div className="bg-slate-900 flex flex-col min-h-screen max-w-full items-center">

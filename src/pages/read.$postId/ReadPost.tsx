@@ -1,5 +1,6 @@
 import { LoaderType } from "@/lib/types";
 import { Link, useLoaderData } from "react-router-dom";
+import { Head } from "vite-react-ssg";
 import { type loader } from "./loader";
 import { PostTitle } from "@/components/posts/PostTitle";
 import { PostDate } from "@/components/posts/PostDate";
@@ -7,34 +8,47 @@ import { PostBody } from "@/components/posts/PostBody";
 import { TagList } from "@/components/tags/TagList";
 import { FC } from "react";
 import { cn } from "@/lib/utils";
+import { useNavigationStateListener } from "@/context/navigation";
 
 export const ReadPost = () => {
   const { post, previousPost, nextPost } = useLoaderData() as LoaderType<
     typeof loader
   >;
+
+  useNavigationStateListener((current, previous) => {
+    if (previous && current.pathname !== previous.pathname) {
+      window.scrollTo(0, 0);
+    }
+  });
+
   return (
-    <div className="px-6">
-      <PostTitle title={post.title} />
-      <PostDate date={new Date(post.date)} />
-      <PostBody text={post.text} />
-      <div className="my-8">
-        {post.tags ? <TagList tags={post.tags} /> : null}
+    <>
+      <Head>
+        <title>{post.title}</title>
+      </Head>
+      <div className="px-6">
+        <PostTitle title={post.title} />
+        <PostDate date={new Date(post.date)} />
+        <PostBody text={post.text} />
+        <div className="my-8">
+          {post.tags ? <TagList tags={post.tags} /> : null}
+        </div>
+        <div className="flex flex-row mb-8">
+          <ReadAnotherButton
+            label="Previous"
+            title={previousPost?.title ?? "-"}
+            redirect={previousPost && `/read/${previousPost.id}`}
+            className="rounded-l-sm"
+          />
+          <ReadAnotherButton
+            label="Next"
+            title={nextPost?.title ?? "-"}
+            redirect={nextPost && `/read/${nextPost.id}`}
+            className="rounded-r-sm"
+          />
+        </div>
       </div>
-      <div className="flex flex-row mb-8">
-        <ReadAnotherButton
-          label="Previous"
-          title={previousPost?.title ?? "-"}
-          redirect={previousPost && `/read/${previousPost.id}`}
-          className="rounded-l-sm"
-        />
-        <ReadAnotherButton
-          label="Next"
-          title={nextPost?.title ?? "-"}
-          redirect={nextPost && `/read/${nextPost.id}`}
-          className="rounded-r-sm"
-        />
-      </div>
-    </div>
+    </>
   );
 };
 
