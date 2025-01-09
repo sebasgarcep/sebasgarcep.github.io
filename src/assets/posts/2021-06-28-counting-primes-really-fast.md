@@ -44,7 +44,7 @@ pub fn count(n: usize) -> usize {
 
 As you might expect, this function does terribly:
 
-```
+```txt
 Begun testing the naive implementation with n = 10^5.
 The amount of prime numbers that are less than or equal to 10^5 is 9592.
 Elapsed: 1.03s
@@ -85,7 +85,7 @@ pub fn count(n: usize) -> usize {
 
 A benchmark using $n = 10^6$ proves this function to be much faster than the naive implementation:
 
-```
+```txt
 Begun testing the sieve implementation with n = 10^6.
 The amount of prime numbers that are less than or equal to 10^6 is 78498.
 Elapsed: 6.86ms
@@ -94,7 +94,7 @@ Finished testing the sieve implementation with n = 10^6.
 
 Sadly, it starts to falters at around $n = 10^9$:
 
-```
+```txt
 Begun testing the sieve implementation with n = 10^9.
 The amount of prime numbers that are less than or equal to 10^9 is 50847534.
 Elapsed: 16.53s
@@ -228,7 +228,7 @@ pub fn count(n: usize) -> usize {
 
 Benchmarks show us that Legendre's formula is faster than the Sieve of Eratosthenes for $n = 10^9$:
 
-```
+```txt
 Begun testing the legendre implementation with n = 10^9.
 The amount of prime numbers that are less than or equal to 10^9 is 50847534.
 Elapsed: 4.29s
@@ -237,7 +237,7 @@ Finished testing the legendre implementation with n = 10^9.
 
 Sadly, Legendre's formula scales poorly. With $n = 10^{10}$ we almost reached the minute mark:
 
-```
+```txt
 Begun testing the legendre implementation with n = 10^10.
 The amount of prime numbers that are less than or equal to 10^10 is 455052511.
 Elapsed: 55.34s
@@ -562,7 +562,7 @@ Because our initial problem is calculating $\pi(10^{12})$, we chose to calculate
 
 Because our implementation essentially uses the sieve algorithm  to calculate primes up to $n = 10^9$, we know it will take at least ~15s to finish. Let's benchmark $n = 10^{10}$:
 
-```
+```txt
 Begun testing the meissel_lehmer implementation with n = 10^10.
 The amount of prime numbers that are less than or equal to 10^10 is 455052511.
 Elapsed: 16.09s
@@ -571,7 +571,7 @@ Finished testing the meissel_lehmer implementation with n = 10^10.
 
 Notice that it does not take much to finish after the 15s mark. Let's see if this extends all the way up to $n = 10^{12}$: 
 
-```
+```txt
 Begun testing the meissel_lehmer implementation with n = 10^12.
 The amount of prime numbers that are less than or equal to 10^12 is 37607912018.
 Elapsed: 18.97s
