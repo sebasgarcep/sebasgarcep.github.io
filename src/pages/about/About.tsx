@@ -6,7 +6,7 @@ import { parseMarkdown } from "@/lib/markdown";
 export const About = () => {
   const markdown = parseMarkdown(aboutMe);
   return (
-    <div className="px-4">
+    <div className="px-6">
       <PostTitle title={markdown.title} />
       <PostBody text={markdown.text} />
     </div>

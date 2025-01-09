@@ -14,7 +14,7 @@ export interface PostListProps {
 
 export const PostList: FC<PostListProps> = ({ posts }) => {
   return (
-    <div className="flex flex-col px-4 py-4 gap-8">
+    <div className="flex flex-col px-6 py-4 gap-8">
       {posts.map((item) => (
         <Link
           to={`/read/${item.id}`}

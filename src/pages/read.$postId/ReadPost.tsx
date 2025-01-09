@@ -13,7 +13,7 @@ export const ReadPost = () => {
     typeof loader
   >;
   return (
-    <div className="px-4">
+    <div className="px-6">
       <PostTitle title={post.title} />
       <PostDate date={new Date(post.date)} />
       <PostBody text={post.text} />
