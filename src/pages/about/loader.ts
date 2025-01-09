@@ -1,5 +1,5 @@
+import * as fs from "node:fs/promises";
 import { parseMarkdown } from "@/lib/markdown";
-import { readFile } from "node:fs/promises";
 
 export interface AboutProps {
   about: {
@@ -9,7 +9,7 @@ export interface AboutProps {
 }
 
 export const loader = async (): Promise<AboutProps> => {
-  const contents = await readFile("./src/assets/about.md", "utf-8");
+  const contents = await fs.readFile("./src/assets/about.md", "utf-8");
   const markdown = parseMarkdown(contents);
   return {
     about: {
