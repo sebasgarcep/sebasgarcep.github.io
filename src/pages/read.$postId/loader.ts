@@ -4,6 +4,7 @@ import { getAllPosts } from "@/lib/markdown";
 
 export interface ReadPostProps {
   post: {
+    id: string;
     title: string;
     date: number;
     text: string;
@@ -34,6 +35,7 @@ export const loader = async ({
     postIndex < posts.length - 1 ? posts[postIndex + 1] : null;
   return {
     post: {
+      id: post.id,
       title: post.title,
       date: post.date.getTime(),
       text: post.text,

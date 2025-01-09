@@ -4,7 +4,7 @@ import { getPostPreview, PostPreview } from "@/lib/preview";
 
 export const loader = async ({
   params,
-}: LoaderFunctionArgs): Promise<{ posts: PostPreview[] }> => {
+}: LoaderFunctionArgs): Promise<{ tag: string; posts: PostPreview[] }> => {
   const { tag: uriTag } = params;
   if (!uriTag) {
     throw new Error("No tag provided");
@@ -13,6 +13,7 @@ export const loader = async ({
   const tag = decodeURIComponent(uriTag);
   const posts = await getAllPosts();
   return {
+    tag,
     posts: posts.filter((item) => item.tags?.includes(tag)).map(getPostPreview),
   };
 };
