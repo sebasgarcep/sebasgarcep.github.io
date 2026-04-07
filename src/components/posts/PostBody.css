@@ -15,7 +15,14 @@
   font-weight: bold;
 }
 
-.PostBody :not(pre)>code {
+.PostBody pre {
+  border-radius: 5px;
+  padding: .15em .2em .2em;
+  color: white;
+  background-color: rgba(115,124,153,.2);
+}
+
+.PostBody p>code {
   border-radius: 5px;
   white-space: normal;
   padding: .15em .2em .2em;

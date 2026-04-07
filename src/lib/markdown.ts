@@ -6,35 +6,23 @@ import markdownit from "markdown-it";
 import katex from "katex";
 import hljs from "highlight.js";
 
-export interface Markdown {
-  id: string;
-  title: string;
-  subtitle: string;
-  date: Date;
-  tags?: string[];
-  image?: {
-    src: string;
-    alt: string;
-  };
-  text: string;
-}
-
 const metadataSchema = zod.object({
   id: zod.string(),
   title: zod.string(),
   subtitle: zod.string(),
   date: zod.string(),
   tags: zod.array(zod.string()).optional(),
-  image: zod
-    .object({
-      src: zod.string(),
-      alt: zod.string(),
-    })
-    .optional(),
+  draft: zod.boolean().optional().default(false),
+  latex: zod.boolean().optional().default(true),
 });
 
+export interface Markdown extends Omit<zod.infer<typeof metadataSchema>, "date"> {
+  date: Date;
+  text: string;
+}
+
 function renderLatex(text: string) {
-  // Qllowing newlines inside of `$$...$$`
+  // Allowing newlines inside of `$$...$$`
   text = text.replace(/\$\$([^$]+?)\$\$/g, (_match, expression: string) => {
     try {
       return katex.renderToString(expression, {
@@ -99,15 +87,14 @@ export const parseMarkdown = (contents: string): Markdown => {
 
   const beginPosition = contents.indexOf("---", 3);
 
-  const rawText = contents.slice(beginPosition + 3).trim();
-  const withoutLatex = renderLatex(rawText);
+  contents = contents.slice(beginPosition + 3).trim();
+  if (metadata.latex) contents = renderLatex(contents);
 
-  const text = md.render(withoutLatex);
+  const text = md.render(contents);
 
   return {
     ...metadata,
     date: new Date(metadata.date),
-
     text,
   };
 };
@@ -127,6 +114,7 @@ export const getAllPosts = async (): Promise<Markdown[]> => {
     );
     postData = fileContents
       .map((item) => parseMarkdown(item))
+      .filter((item) => !item.draft)
       .sort((a, b) => b.date.getTime() - a.date.getTime());
   }
 
