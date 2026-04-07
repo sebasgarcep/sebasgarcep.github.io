@@ -4,9 +4,6 @@ title: Writing a React Native App using Expo and Google Social Login
 subtitle: This tutorial will show how to build an app on Expo with SSO capabilities
 date: 2022-01-03
 tags: [Software Engineering, React Native, Expo, Social Login, Express, Passport, Google]
-image:
-    src: /assets/img/2022-01-03-social-login-app/lock.jpg
-    alt: Lock on a fence
 ---
 
 This will be a brief tutorial on how to write a React Native application, using Expo, that implements Social Authentication, using Google. We will use ExpressJS and Passport in the backend to manage the authentication process. We will assume that the reader is already comfortable with React Native and Express and that they are also proficient with Typescript.
@@ -343,11 +340,11 @@ Everything after that is business logic.
 
 At this point we have a working Login Screen that allows logging in using Google.
 
-<img src="/assets/img/2022-01-03-social-login-app/screenshot_login.jpg" alt="Login Screen" width="200"/>
+<img src="/public/assets/img/2022-01-03-social-login-app/screenshot_login.jpg" alt="Login Screen" width="200"/>
 
 Moreover, we have a Home Screen that shows authenticated users a random message from the server.
 
-<img src="/assets/img/2022-01-03-social-login-app/screenshot_home.jpg" alt="Home Screen" width="200"/>
+<img src="/public/assets/img/2022-01-03-social-login-app/screenshot_home.jpg" alt="Home Screen" width="200"/>
 
 At which point we are done with the tutorial.
 

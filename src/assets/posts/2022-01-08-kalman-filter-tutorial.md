@@ -4,9 +4,6 @@ title: Understanding the Kalman Filter
 subtitle: Or how to ensure estimates remain correct over time.
 date: 2022-01-08
 tags: [Mathematics, Data Assimilation, Kalman Filter, Rust]
-image:
-    src: /assets/img/2022-01-08-kalman-filter/preview.jpg
-    alt: Boats on a lake
 ---
 
 Society depends on having correct estimates of what may happen. Whether it is the climate or traffic, humans have built models of reality which help us make better decisions. But any model is bound to have a margin of error with respect to reality, and as time passes the model will diverge from reality. To prevent this we would like to integrate observations from reality into the model from time to time. But we run into the problem that observations of reality are often incomplete or have a margin of error themselves. The Kalman Filter is a method of combining both sources of information (model state with observations) in a way that reduces the margin of error in the output.
@@ -138,7 +135,7 @@ which finalizes the proof.
 
 Suppose we have a signal-repeating satellite orbiting around the Earth. Thanks to [Kepler's laws of planetary motion](https://en.wikipedia.org/wiki/Kepler's_laws_of_planetary_motion) we know that this orbit is elliptical, with the Earth at one of its foci. Any ellipse can be described by its semimajor axis $a$ (half the length of its largest diameter) and its semiminor axis $b$ (half the length of its smallest diameter). The focal distance (distance from the center of the ellipse to either of the foci) can be found with the formula $c = \sqrt{a^2 - b^2}$. The orbit of the satellite and the position of the Earth relative to it will look something like this plot:
 
-![Real Orbit with Earth at its Foci](/assets/img/2022-01-08-kalman-filter-tutorial/real_orbit.svg)
+![Real Orbit with Earth at its Foci](/public/assets/img/2022-01-08-kalman-filter-tutorial/real_orbit.svg)
 
 Because we have a signal-repeating satellite orbiting the earth, we can measure how far away from the Earth it is by bouncing a signal and measuring how long it takes to come back (the signal will travel at the speed of light). We can use this tool to measure the periapsis (closest distance to Earth) and apoapsis of the orbit (furthest away from Earth). Clearly
 
@@ -153,7 +150,7 @@ and we can solve this system of equations to obtain the values of $a$ and $c$. T
 
 In real life we are going to face the problem that the measurement of the periapsis and apoapsis will be noisy, which means we won't have a perfect approximation of the orbit of the satellite. We also cannot constantly measure the position of the satellite in space (using the distance and the angle relative to Earth) as each measurement will have some amount of noise to it, and the farther away the satellite is, the noisier the measurements get. We can observe this behaviour in the following graph
 
-![Real Orbit with Measurements](/assets/img/2022-01-08-kalman-filter-tutorial/meas_orbit.svg)
+![Real Orbit with Measurements](/public/assets/img/2022-01-08-kalman-filter-tutorial/meas_orbit.svg)
 
 Using the Kalman Filter we can combine both sources of information though (model state and measurements) to obtain better results.
 
@@ -264,11 +261,11 @@ Finally we implement the orbit simulation and the functions that output the resu
 
 After implementing the Kalman Filter we obtain the following results
 
-![Applying Kalman Filter Corrections](/assets/img/2022-01-08-kalman-filter-tutorial/corr_orbit.svg)
+![Applying Kalman Filter Corrections](/public/assets/img/2022-01-08-kalman-filter-tutorial/corr_orbit.svg)
 
 The green line shows the measurements over time, and the yellow line shows the orbit predicted by our Kalman Filter model. As we can see it is far more stable and a better approximation of the real orbit than the measurements themselves. In fact the relative error rate over time is far smaller with the Kalman Filter corrections than without them:
 
-![Relative error rates over time](/assets/img/2022-01-08-kalman-filter-tutorial/error.svg)
+![Relative error rates over time](/public/assets/img/2022-01-08-kalman-filter-tutorial/error.svg)
 
 And this is with a constant position model! With better models or numerical stabilization procedures we are sure to obtain even better results. This is the power of the Kalman Filter.
 
