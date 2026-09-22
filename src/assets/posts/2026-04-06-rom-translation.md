@@ -1,6 +1,6 @@
 ---
-id: rom-translation-part-1
-title: Translating a Retro Game (Part 1)
+id: rom-translation
+title: Translating a Retro Game
 subtitle: How hard can it be?
 date: 2026-04-06
 tags: [Assembly, ROM Hacking]
@@ -9,11 +9,11 @@ latex: false
 
 I recently rediscovered this gem of a game while digging through some of my old files:
 
-![Start screen](/public/assets/img/2026-04-06-rom-translation-part-1/start-screen.jpg)
+![Start screen](/public/assets/img/2026-04-06-rom-translation/start-screen.jpg)
 
 For those that don't know, it is called Digimon D-Project, and it ran on the WonderSwan Color (a GameBoy competitor that never made it out of Japan).
 
-This game is a fun way of spending an afternoon but it has one big issue for western audiences: it is exclusively in Japanese. Every Reddit thread about it ends the same way: someone lamenting that this WonderSwan gem is stuck in Japanese. If only there were fan translations available more people could enjoy it.
+This game is a fun way of spending an afternoon but it has one big issue for western audiences: it is exclusively in Japanese. Every Reddit thread about it ends the same way: someone lamenting that this WonderSwan gem lacks a localization. If only there were fan translations available more people could enjoy it.
 
 So I asked myself: *how hard can it be to provide one?*
 
@@ -25,7 +25,7 @@ And instead of actually playing the game I went on a weekend-long rabbit hole tr
 
 I acquired a ROM for this game (through less-than-scrupulous means), downloaded the **Mesen** emulator and went to work. First I needed to replace at least one piece of dialogue in the game to know that this could be done at all. So I booted up the game and got this:
 
-![First dialogue screen](/public/assets/img/2026-04-06-rom-translation-part-1/first-dialogue-screen.png)
+![First dialogue screen](/public/assets/img/2026-04-06-rom-translation/first-dialogue-screen.png)
 
 And that's when it hit me: I can't copy-paste from the emulator screen and I don't know Japanese! How am I supposed to get the text out of the game?
 
@@ -49,11 +49,11 @@ and performed a string search on the binary using Visual Studio Code's Hex Edito
 
 So I went to Gemini again and found a translation for the text: `A problem has occurred with this software.`. I did a binary replacement of the Japanese text with the translation, encoded as CP932 and I made sure to truncate the text so it didn't occupy more bytes than the existing ones (I didn't want to touch unrelated data, since it might contain instructions and make the game crash).
 
-![Dialogue screen with gibberish](/public/assets/img/2026-04-06-rom-translation-part-1/gibberish-screen.png)
+![Dialogue screen with gibberish](/public/assets/img/2026-04-06-rom-translation/gibberish-screen.png)
 
 But the dialogue is gibberish now, with the exception of the first letter. Turns out CP932 only encodes the uppercase letters from the Latin script. After accounting for this we get our first translation. Yeah!
 
-![First translated dialogue box](/public/assets/img/2026-04-06-rom-translation-part-1/first-translation.png)
+![First translated dialogue box](/public/assets/img/2026-04-06-rom-translation/first-translation.png)
 
 ## Deep dive
 
@@ -211,11 +211,19 @@ await fs.writeFile("Digital Monster - D-Project (Japan) - Translated.wsc", romBu
 
 The end result is incredible: I can play through most of the early game in English for the first time in my life.
 
-![First translated dialogue box](/public/assets/img/2026-04-06-rom-translation-part-1/sample-gameplay.png)
+![First translated dialogue box](/public/assets/img/2026-04-06-rom-translation/sample-gameplay.png)
 
-## Coming up
+## Roadblocks
 
-The story doesn't end here though. In Part 2 I'll cover some of the walls I hit, and why I think this project might take longer than a couple weekends.
+I started hitting some roadblocks after this. Firstly, I confirmed there was no string table data structure anywhere: the few times I found string redirects they weren't packed uniformly, with redirects sometimes being 6 offsets apart and sometimes 10. Strings were dispersed everywhere, even in between code segments, making the translation task a grueling one. Translating the main menu caused the game to crash. Translations larger than the input text were being cut off.
+
+I tried working around this by identifying a large enough empty block in the ROM and inserting my translated strings there, while on the other side inserting [a custom function](https://github.com/sebasgarcep/digimon-dproject-translation/blob/f631fa7eb55913d7981f067636c49adc05b76904/006_apply_translations.js#L36) to translate from my strings table. None of the previous issues ended up being resolved by this.
+
+## Moving on
+
+My weekend was finally over and I had to get back to work. I've learned a few things, and I've found a deeper appreciation for fan projects reverse engineering older games, giving them a new breath of life and hopefully a new fan or two.
+
+If this post spiked your interest I invite you to give this project a try. Maybe one day I will finally be able to finish the game and understand it!
 
 ## References
 - [Wikipedia - CP932](https://en.wikipedia.org/wiki/Code_page_932_(Microsoft_Windows))
